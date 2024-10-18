@@ -12,6 +12,7 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
   
   const { textStream } = await streamText({
+    system: "Only reply with the word 'hello' regardless of the user's message.",
     model: openai('gpt-4o-mini'),
     messages,
     onFinish: async ({ usage }) => {
