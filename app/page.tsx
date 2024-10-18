@@ -1,10 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import PocketBase from 'pocketbase';
 import OpenAIChat from '@/components/OpenAIChat';
 import ClaudeChat from '@/components/ClaudeChat';
 import GeminiChat from '@/components/GeminiChat';
 import SharedInputForm from '@/components/SharedInputForm';
+import TokenCounter from '@/components/TokenCounter';
 import { Message } from 'ai';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -28,6 +30,9 @@ export default function Home() {
   };
 
   const handleSubmit = (apiEndpoint: string) => async (input: string) => {
+
+    if (input.trim() === '') return;
+
     const timestamp = Date.now();
     const userMessage: Message = { role: 'user', content: input, id: timestamp.toString() };
     setSyncedInput("");
@@ -39,14 +44,13 @@ export default function Home() {
     };
 
     const syncedEndpoints = Object.entries(syncStates)
-      .filter((isSynced) => isSynced)
+      .filter(([_, isSynced]) => isSynced)
       .map(([model]) => endpoints[model as keyof typeof endpoints]);
 
-    if (syncedEndpoints.length === 0) {
-      syncedEndpoints.push(apiEndpoint);
-    }
+    // If no toggles are on, only use the endpoint of the form that was submitted
+    const endpointsToUse = syncedEndpoints.length > 0 ? syncedEndpoints : [apiEndpoint];
 
-    const apiCalls = syncedEndpoints.map(async (endpoint) => {
+    const apiCalls = endpointsToUse.map(async (endpoint) => {
       let setMessages;
       if (endpoint.includes('openai')) {
         setOpenAIMessages(prev => [...prev, userMessage]);
@@ -81,18 +85,19 @@ export default function Home() {
 
         const reader = response.body?.getReader();
         const decoder = new TextDecoder();
-
+        
         if (reader) {
           let fullContent = '';
           while (true) {
             const { done, value } = await reader.read();
+            
             if (done) {
-              console.log(`Finished response from ${endpoint}:`, fullContent);
+              
               break;
             }
             const chunk = decoder.decode(value);
             fullContent += chunk;
-
+            
             setMessages(prev => {
               const newMessages = [...prev];
               const lastMessage = newMessages[newMessages.length - 1];
@@ -109,7 +114,7 @@ export default function Home() {
     });
 
     await Promise.all(apiCalls);
-  };
+  };  
 
   return (
     <div className="flex flex-col w-full h-screen bg-[#101516] text-zinc-100 p-4">
@@ -119,7 +124,9 @@ export default function Home() {
             <h2 className="text-xl font-bold text-yellow-500 px-3 py-1 rounded-md relative">
               <span className="relative z-10">ChatGPT</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
+              <TokenCounter provider="openai" />
             </h2>
+            
             <label className="flex items-center cursor-pointer">
               <span className="mr-2 text-yellow-500">Sync</span>
               <div className="relative">
@@ -129,8 +136,8 @@ export default function Home() {
                   checked={syncStates.openai}
                   onChange={() => toggleSync('openai')}
                 />
-                <div className={`block w-14 h-8 rounded-full transition-colors ${syncStates.openai ? 'bg-yellow-500' : 'bg-[#101516]'}`}></div>
-                <div className={`absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${syncStates.openai ? 'transform translate-x-6' : ''}`}></div>
+                <div className={`block w-10 h-4 rounded-full transition-colors ${syncStates.openai ? 'bg-yellow-500' : 'bg-[#2f3030]'}`}></div>
+                <div className={`absolute -left-1 -top-1 bg-white w-6 h-6 rounded-full transition-transform ${syncStates.openai ? 'transform translate-x-6' : ''}`}></div>
               </div>
             </label>
           </div>
@@ -152,6 +159,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-yellow-500 px-3 py-1 rounded-md relative">
               <span className="relative z-10">Claude</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
+              <TokenCounter provider="anthropic" />
             </h2>
             <label className="flex items-center cursor-pointer">
               <span className="mr-2 text-yellow-500">Sync</span>
@@ -162,8 +170,8 @@ export default function Home() {
                   checked={syncStates.claude}
                   onChange={() => toggleSync('claude')}
                 />
-                <div className={`block w-14 h-8 rounded-full transition-colors ${syncStates.claude ? 'bg-yellow-500' : 'bg-[#101516]'}`}></div>
-                <div className={`absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${syncStates.claude ? 'transform translate-x-6' : ''}`}></div>
+                <div className={`block w-10 h-4 rounded-full transition-colors ${syncStates.claude ? 'bg-yellow-500' : 'bg-[#2f3030]'}`}></div>
+                <div className={`absolute -left-1 -top-1 bg-white w-6 h-6 rounded-full transition-transform ${syncStates.claude ? 'transform translate-x-6' : ''}`}></div>
               </div>
             </label>
           </div>
@@ -185,6 +193,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-yellow-500 px-3 py-1 rounded-md relative">
               <span className="relative z-10">Gemini</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
+              <TokenCounter provider="google" />
             </h2>
             <label className="flex items-center cursor-pointer">
               <span className="mr-2 text-yellow-500">Sync</span>
@@ -195,8 +204,8 @@ export default function Home() {
                   checked={syncStates.gemini}
                   onChange={() => toggleSync('gemini')}
                 />
-                <div className={`block w-14 h-8 rounded-full transition-colors ${syncStates.gemini ? 'bg-yellow-500' : 'bg-[#101516]'}`}></div>
-                <div className={`absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${syncStates.gemini ? 'transform translate-x-6' : ''}`}></div>
+                <div className={`block w-10 h-4 rounded-full transition-colors ${syncStates.gemini ? 'bg-yellow-500' : 'bg-[#2f3030]'}`}></div>
+                <div className={`absolute -left-1 -top-1 bg-white w-6 h-6 rounded-full transition-transform ${syncStates.gemini ? 'transform translate-x-6' : ''}`}></div>
               </div>
             </label>
           </div>
