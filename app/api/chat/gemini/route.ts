@@ -5,9 +5,6 @@ import PocketBase from 'pocketbase';
 
 const pb = new PocketBase('https://pocket.leaselogic.app/');
 
-
-export const runtime = 'edge';
-
 export async function POST(req: Request) {
   const cookie = cookies().get('pb_auth');
 

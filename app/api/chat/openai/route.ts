@@ -6,16 +6,13 @@ import PocketBase from 'pocketbase';
 
 const pb = new PocketBase('https://pocket.leaselogic.app/');
 
-export const runtime = 'edge';
-
-
 export async function POST(req: Request) {
   const cookie = cookies().get('pb_auth');
 
   // This never happens because of the middleware,
   // but we must make typescript happy
   if (!cookie) throw new Error('Not logged in');
-  
+
   const { messages } = await req.json();
   
   const { textStream } = await streamText({
