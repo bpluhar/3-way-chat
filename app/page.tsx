@@ -29,7 +29,6 @@ export default function Home() {
   };
 
   const handleSubmit = (apiEndpoint: string) => async (input: string) => {
-
     if (input.trim() === '') return;
 
     const timestamp = Date.now();
@@ -42,12 +41,24 @@ export default function Home() {
       gemini: '/api/chat/gemini'
     };
 
-    const syncedEndpoints = Object.entries(syncStates)
-      .filter(entry => entry[1])
-      .map(([model]) => endpoints[model as keyof typeof endpoints]);
+    let endpointsToUse: string[];
 
-    // If no toggles are on, only use the endpoint of the form that was submitted
-    const endpointsToUse = syncedEndpoints.length > 0 ? syncedEndpoints : [apiEndpoint];
+    // Check if the submitted chat's sync is disabled
+    const submittedModel = Object.keys(endpoints).find(key => endpoints[key as keyof typeof endpoints] === apiEndpoint);
+    if (submittedModel && !syncStates[submittedModel as keyof typeof syncStates]) {
+      // If sync is disabled for the submitted chat, only use its endpoint
+      endpointsToUse = [apiEndpoint];
+    } else {
+      // Otherwise, use all synced endpoints
+      endpointsToUse = Object.entries(syncStates)
+        .filter(entry => entry[1])
+        .map(([model]) => endpoints[model as keyof typeof endpoints]);
+      
+      // If no toggles are on, only use the endpoint of the form that was submitted
+      if (endpointsToUse.length === 0) {
+        endpointsToUse = [apiEndpoint];
+      }
+    }
 
     const apiCalls = endpointsToUse.map(async (endpoint) => {
       let setMessages;
