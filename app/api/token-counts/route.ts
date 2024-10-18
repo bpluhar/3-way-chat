@@ -11,7 +11,7 @@ export async function GET() {
     const data = await pb.collection('token_counts').getOne('1234567890abcde');
     return NextResponse.json(data);
   } catch (error) {
-    //console.error('Error fetching data:', error);
+    console.error('Error fetching data:', error);
     return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }
 }
