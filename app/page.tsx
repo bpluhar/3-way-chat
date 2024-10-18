@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import PocketBase from 'pocketbase';
+import { useState } from 'react';
 import OpenAIChat from '@/components/OpenAIChat';
 import ClaudeChat from '@/components/ClaudeChat';
 import GeminiChat from '@/components/GeminiChat';
@@ -44,7 +43,7 @@ export default function Home() {
     };
 
     const syncedEndpoints = Object.entries(syncStates)
-      .filter(([_, isSynced]) => isSynced)
+      .filter(entry => entry[1])
       .map(([model]) => endpoints[model as keyof typeof endpoints]);
 
     // If no toggles are on, only use the endpoint of the form that was submitted

@@ -13,8 +13,9 @@ export async function POST(req: Request) {
   const { textStream } = await streamText({
     model: anthropic('claude-3-haiku-20240307'),
     messages,
-    onFinish: async (result: any) => {
-      const tokenCount = result.usage // if you want to call the usage tokens onCompletion + save stuff etc
+    onFinish: async ({ usage }) => {
+      console.log('Claude result:', usage);
+      const tokenCount = usage // if you want to call the usage tokens onCompletion + save stuff etc
       //console.log('Token usage by Google:', JSON.stringify(tokenCount, null, 2));
       try {
         const record = await pb.collection('token_counts').getOne('1234567890abcde');
