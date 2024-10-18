@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Dashboard",
+  title: "Dashboard - Chat",
+  description: "Chat",
 };
 
 export default function RootLayout({

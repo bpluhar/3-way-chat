@@ -8,6 +8,7 @@ import SharedInputForm from '@/components/SharedInputForm';
 import TokenCounter from '@/components/TokenCounter';
 import { Message } from 'ai';
 import { v4 as uuidv4 } from 'uuid';
+import { logout } from '@/app/auth/action';
 
 export default function Home() {
 
@@ -129,11 +130,21 @@ export default function Home() {
 
   return (
     <div className="flex flex-col w-full h-screen bg-[#101516] text-zinc-100 p-4">
+      <div className="w-full mb-4 p-4 bg-[#060F11] rounded-lg border border-zinc-700 flex justify-between items-center">
+        <h1 className="text-xl font-bold text-yellow-500">Chat</h1>
+        <button
+          onClick={() => logout()}
+          className="bg-[#101516] hover:bg-[#1c2526] text-red-800 font-bold py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-[#060F11] border border-red-800"
+        >
+          Logout
+        </button>
+      </div>
       <div className="flex flex-row flex-grow overflow-hidden space-x-4">
+        
         <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-zinc-700 bg-[#060F11]">
           <div className="flex items-center justify-between p-4 border-b border-zinc-700">
-            <h2 className="text-xl font-bold text-yellow-500 px-3 py-1 rounded-md relative">
-              <span className="relative z-10">ChatGPT</span>
+            <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
+              <span className="relative z-10">OpenAI</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
               <TokenCounter provider="openai" />
             </h2>
@@ -167,8 +178,8 @@ export default function Home() {
         </div>
         <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-zinc-700 bg-[#060F11]">
           <div className="flex items-center justify-between p-4 border-b border-zinc-700">
-            <h2 className="text-xl font-bold text-yellow-500 px-3 py-1 rounded-md relative">
-              <span className="relative z-10">Claude</span>
+            <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
+              <span className="relative z-10">Anthropic</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
               <TokenCounter provider="anthropic" />
             </h2>
@@ -201,8 +212,8 @@ export default function Home() {
         </div>
         <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-zinc-700 bg-[#060F11]">
           <div className="flex items-center justify-between p-4 border-b border-zinc-700">
-            <h2 className="text-xl font-bold text-yellow-500 px-3 py-1 rounded-md relative">
-              <span className="relative z-10">Gemini</span>
+            <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
+              <span className="relative z-10">Google</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
               <TokenCounter provider="google" />
             </h2>
