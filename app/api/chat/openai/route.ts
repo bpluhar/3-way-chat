@@ -47,17 +47,9 @@ export async function POST(req: Request) {
         
       }
       catch (error: unknown) {
-        if (error instanceof Error && 'status' in error && error.status === 404) {
-          await pb.collection('token_counts').create({
-            id: userId,
-            openai: tokenCount,
-            anthropic: {},
-            google: {}
-          });
-        }
-        else {
+        
           console.error('Error updating token count in PocketBase:', error);
-        }
+        
       }
     }
   });

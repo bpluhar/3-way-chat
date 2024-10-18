@@ -20,15 +20,6 @@ export async function GET() {
     
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Error fetching data:', error);
-
-    await pb.collection('token_counts').create({
-      id: userId,
-      openai: {"completionTokens": 0, "promptTokens": 0, "totalTokens": 0},
-      anthropic: {"completionTokens": 0, "promptTokens": 0, "totalTokens": 0},
-      google: {"completionTokens": 0, "promptTokens": 0, "totalTokens": 0}
-    });
-
     return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }
 }

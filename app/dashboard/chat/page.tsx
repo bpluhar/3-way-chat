@@ -146,7 +146,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">OpenAI</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
-              <TokenCounter provider="openai" />
+              {/* <TokenCounter provider="openai" /> */}
             </h2>
             
             <label className="flex items-center cursor-pointer">
@@ -181,7 +181,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">Anthropic</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
-              <TokenCounter provider="anthropic" />
+              {/* <TokenCounter provider="anthropic" /> */}
             </h2>
             <label className="flex items-center cursor-pointer">
               <span className="mr-2 text-yellow-500">Sync</span>
@@ -215,7 +215,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">Google</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
-              <TokenCounter provider="google" />
+              {/* <TokenCounter provider="google" /> */}
             </h2>
             <label className="flex items-center cursor-pointer">
               <span className="mr-2 text-yellow-500">Sync</span>

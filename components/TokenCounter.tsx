@@ -15,7 +15,7 @@ export default function TokenCounter({ provider }: TokenCounterProps) {
 
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/token-counts');
+        //const response = await fetch('/api/token-counts');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -25,7 +25,7 @@ export default function TokenCounter({ provider }: TokenCounterProps) {
           setError(null);
         }
       } catch (err) {
-        console.error('Error fetching data:', err);
+        //console.error('Error fetching data:', err);
         if (isMounted) {
           //setError('Failed to fetch data. Retrying...');
         }
@@ -33,7 +33,7 @@ export default function TokenCounter({ provider }: TokenCounterProps) {
     };
 
     fetchData();
-    const intervalId = setInterval(fetchData, 3000); // Poll every 3 seconds
+    const intervalId = setInterval(fetchData, 10000); // Poll every 10 seconds
 
     return () => {
       isMounted = false;

@@ -1,8 +1,23 @@
 // ./app/page.tsx
 
-import { login } from '../auth/action';
+'use client';
+
+import { useEffect } from 'react';
+import { authenticate } from '../auth/action';
+import { redirect } from 'next/navigation';
+import { useFormState } from 'react-dom';
 
 export default function Page() {
+
+  const [code, action] = useFormState(authenticate, undefined);
+
+  useEffect(() => {
+    if (code === 'ok') {
+      redirect('/dashboard');
+    }
+  
+  }, [code])
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#101516] text-zinc-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-[#060F11] rounded-xl shadow-lg border border-zinc-700">
@@ -10,7 +25,7 @@ export default function Page() {
           <span className="relative z-10">Login</span>
           <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
         </h2>
-        <form action={login} className="space-y-6">
+        <form action={action} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-zinc-300">
               E-mail
