@@ -7,7 +7,8 @@ const pb = new PocketBase('https://pocket.leaselogic.app/');
 
 export async function POST(req: Request) {
   const cookie = cookies().get('pb_auth');
-
+  const userId = JSON.parse(cookie?.value || '{}').model.id;
+  
   // This never happens because of the middleware,
   // but we must make typescript happy
   if (!cookie) throw new Error('Not logged in');
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
       const tokenCount = usage // if you want to call the usage tokens onCompletion + save stuff etc
       //console.log('Token usage by Google:', JSON.stringify(tokenCount, null, 2));
       try {
-        const record = await pb.collection('token_counts').getOne('1234567890abcde');
+        const record = await pb.collection('token_counts').getOne(userId);
         
         if (record.google) {
           const newTokenCount = {
@@ -36,7 +37,7 @@ export async function POST(req: Request) {
             completionTokens: record.google.completionTokens + tokenCount.completionTokens,
             totalTokens: record.google.totalTokens + tokenCount.totalTokens
           };
-          await pb.collection('token_counts').update('1234567890abcde', {
+          await pb.collection('token_counts').update(userId, {
             google: newTokenCount
           });
         } else {
@@ -45,7 +46,7 @@ export async function POST(req: Request) {
             completionTokens: tokenCount.completionTokens,
             totalTokens: tokenCount.totalTokens
           };
-          await pb.collection('token_counts').update('1234567890abcde', {
+          await pb.collection('token_counts').update(userId, {
             google: newTokenCount
           });
         } 
@@ -54,7 +55,7 @@ export async function POST(req: Request) {
       catch (error: unknown) {
         if (error instanceof Error && 'status' in error && error.status === 404) {
           await pb.collection('token_counts').create({
-            id: '1234567890abcde',
+            id: userId,
             google: tokenCount,
             anthropic: {},
             openai: {}
