@@ -25,7 +25,7 @@ export default function TokenCounter({ provider }: TokenCounterProps) {
           setError(null);
         }
       } catch (err) {
-        console.error('Error fetching data:', err);
+        //console.error('Error fetching data:', err);
         if (isMounted) {
           setError('Failed to fetch data. Retrying...');
         }
