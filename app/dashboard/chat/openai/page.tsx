@@ -146,7 +146,7 @@ export default function Home() {
         <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-zinc-700 bg-[#060F11]">
           <div className="flex items-center justify-between p-4 border-b border-zinc-700">
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
-              <span className="relative z-10">OpenAI</span>
+              <span className="relative z-10">OpenAI (gpt-4o-mini)</span>
               <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
               {/* <TokenCounter provider="openai" /> */}
             </h2>

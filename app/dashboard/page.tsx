@@ -67,6 +67,24 @@ export default function Dashboard() {
             Chat
           </Link>
         </div>
+
+
+        {/* 3-Way Chat */}
+        <div className="flex items-center justify-between p-4 m-4 border rounded-md border-zinc-700">
+          <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
+            <span className="relative z-10">3-Way Chat</span>
+            {/* <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-lg rounded-md"></span> */}
+            {/* <TokenCounter provider="openai" /> */}
+          </h2>
+
+          <Link
+            href="/dashboard/chat"
+            className="px-6 py-2 rounded-lg bg-yellow-500 text-zinc-900"
+          >
+            Chat
+          </Link>
+        </div>
+
       </div>
     </div>
   );

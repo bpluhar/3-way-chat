@@ -20,6 +20,8 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
       throw new Error("User not authenticated");
     }
 
+    // Get the existing record
+
     const existingRecord = await pb
       .collection("token_counts")
       .getOne(pb.authStore.model.id)
@@ -30,10 +32,8 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
     for (const [provider, count] of Object.entries(tokenCount)) {
       if (existingRecord && existingRecord[provider]) {
         updatedData[provider as keyof TokenCountUpdate] = {
-          promptTokens:
-            existingRecord[provider].promptTokens + count.promptTokens,
-          completionTokens:
-            existingRecord[provider].completionTokens + count.completionTokens,
+          promptTokens: existingRecord[provider].promptTokens + count.promptTokens,
+          completionTokens: existingRecord[provider].completionTokens + count.completionTokens,
           totalTokens: existingRecord[provider].totalTokens + count.totalTokens,
         };
       } else {
@@ -41,7 +41,9 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
       }
     }
 
+
     if (existingRecord) {
+      
       await pb
         .collection("token_counts")
         .update(pb.authStore.model.id, updatedData);
@@ -74,5 +76,23 @@ export async function getTokenCount() {
   } catch (error) {
     console.error("Error getting token count:", error);
     return null;
+  }
+}
+
+export async function createTokenCount() {
+  
+  const pb = await initPocketbaseFromCookie();
+
+  try {
+    await pb.collection("token_counts").create({
+      id: pb.authStore.model?.id,
+      openai: { completionTokens: 0, promptTokens: 0, totalTokens: 0 },
+      anthropic: { completionTokens: 0, promptTokens: 0, totalTokens: 0 },
+      google: { completionTokens: 0, promptTokens: 0, totalTokens: 0 },
+        });
+      } catch (error) {
+        if (error instanceof Error && "status" in error && error.status === 400) {
+      console.error("Error creating token count in PocketBase:", error);
+    }
   }
 }
