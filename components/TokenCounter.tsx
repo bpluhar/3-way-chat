@@ -15,7 +15,8 @@ export default function TokenCounter({ provider }: TokenCounterProps) {
 
     const fetchData = async () => {
       try {
-        //const response = await fetch('/api/token-counts');
+         const response = await fetch('/api/token-counts');
+        
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
