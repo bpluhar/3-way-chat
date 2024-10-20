@@ -17,6 +17,7 @@ export async function POST(req: Request) {
   
   const { textStream } = await streamText({
     model: anthropic('claude-3-haiku-20240307'),
+    //model: anthropic('claude-3-opus-20240229'),
     messages,
     onFinish: async ({ usage }) => {
       //console.log('Claude result:', usage);
@@ -33,7 +34,7 @@ export async function POST(req: Request) {
             totalTokens: record.anthropic.totalTokens + tokenCount.totalTokens
           };
 
-          await updateTokenCount(newTokenCount);  
+          await updateTokenCount({ anthropic: newTokenCount });  
 
         } else {
           const newTokenCount = {
@@ -41,7 +42,7 @@ export async function POST(req: Request) {
             completionTokens: tokenCount.completionTokens,
             totalTokens: tokenCount.totalTokens
           };
-          await updateTokenCount(newTokenCount);  
+          await updateTokenCount({ anthropic: newTokenCount });  
         } 
         
       }
