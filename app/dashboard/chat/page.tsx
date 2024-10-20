@@ -8,7 +8,7 @@ import SharedInputForm from "@/components/SharedInputForm";
 //import TokenCounter from '@/components/TokenCounter';
 import { Message } from "ai";
 import { v4 as uuidv4 } from "uuid";
-import { logout } from "@/app/auth/action";
+import Link from "next/link";
 
 export default function Home() {
   const [syncedInput, setSyncedInput] = useState("");
@@ -144,13 +144,13 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full h-dvh bg-[#101516] text-zinc-100 p-4">
       <div className="w-full mb-4 p-4 bg-[#060F11] rounded-lg border border-zinc-700 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-yellow-500">Chat</h1>
-        <button
-          onClick={() => logout()}
-          className="bg-[#101516] hover:bg-[#1c2526] text-red-800 font-bold py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-[#060F11] border border-red-800"
+      <h1 className="text-xl font-bold text-yellow-500">Chat</h1>
+        <Link
+          href="/dashboard"
+          className="bg-[#101516] hover:bg-[#1c2526] text-yellow-500 font-bold py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-[#060F11] border border-yellow-500"
         >
-          Logout
-        </button>
+          Menu
+        </Link>
       </div>
       <div className="flex flex-row flex-grow overflow-hidden space-x-4">
         <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-zinc-700 bg-[#060F11]">
