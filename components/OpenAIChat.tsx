@@ -49,9 +49,10 @@ export default function OpenAIChat({ messages }: OpenAIChatProps) {
   return (
     <div className="flex-grow overflow-auto p-4">
       {messages.map((m) => {
-        const content = m.role === "assistant"
-          ? m.content.replace(/\n\nTokens: \d+ input, \d+ output$/, "")
-          : m.content;
+        const content =
+          m.role === "assistant"
+            ? m.content.replace(/\n\nTokens: \d+ input, \d+ output$/, "")
+            : m.content;
 
         return (
           <div
