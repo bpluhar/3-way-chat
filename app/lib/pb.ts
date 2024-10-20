@@ -27,10 +27,13 @@ export async function initPocketBaseFromRequest(request: NextRequest) {
   
     try {
       // get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
-      pb.authStore.isValid && await pb.collection('users').authRefresh();
-    } catch (_) {
+      if (pb.authStore.isValid) {
+        await pb.collection('users').authRefresh();
+      }
+    } catch (error) {
       // clear the auth store on failed refresh
       pb.authStore.clear();
+      console.error('Failed to refresh auth:', error);
     }
   
     return pb

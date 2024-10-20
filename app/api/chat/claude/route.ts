@@ -3,10 +3,6 @@ import { anthropic } from '@ai-sdk/anthropic';
 import { streamText } from 'ai';
 import { cookies } from 'next/headers';
 
-import PocketBase from 'pocketbase';
-
-const pb = new PocketBase('https://pocket.leaselogic.app/');
-
 export async function POST(req: Request) {
   const cookie = cookies().get('pb_auth');
   // This never happens because of the middleware,

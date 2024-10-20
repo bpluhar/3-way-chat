@@ -5,7 +5,7 @@ import OpenAIChat from '@/components/OpenAIChat';
 import ClaudeChat from '@/components/ClaudeChat';
 import GeminiChat from '@/components/GeminiChat';
 import SharedInputForm from '@/components/SharedInputForm';
-import TokenCounter from '@/components/TokenCounter';
+//import TokenCounter from '@/components/TokenCounter';
 import { Message } from 'ai';
 import { v4 as uuidv4 } from 'uuid';
 import { logout } from '@/app/auth/action';

@@ -50,7 +50,7 @@ export async function authenticate(prevState: string | undefined, formData: Form
 
     // I would create a zod schema here to validate the email and password. 
     // Too lazy for now.... look above for example of data validation. 
-    const auth = await pb.collection('users').authWithPassword(formData.get('email') as string, formData.get('password') as string)
+    await pb.collection('users').authWithPassword(formData.get('email') as string, formData.get('password') as string)
 
     if (pb.authStore.isValid) {
       cookies().set('pb_auth', pb.authStore.exportToCookie());
