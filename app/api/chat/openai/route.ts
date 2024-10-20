@@ -18,9 +18,7 @@ export async function POST(req: Request) {
     onFinish: async ({ usage }) => {
       const tokenCount = usage;
       try {
-
         await updateTokenCount({ openai: tokenCount });
-
 
         // const record = await getTokenCount();
         // //console.log(record);
@@ -39,7 +37,6 @@ export async function POST(req: Request) {
         //   };
         //   await updateTokenCount({ openai: newTokenCount });
         // }
-
       } catch (error: unknown) {
         console.error("Error updating token count in PocketBase:", error);
       }

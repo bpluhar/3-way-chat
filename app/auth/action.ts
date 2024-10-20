@@ -28,8 +28,6 @@ export async function authenticate(
       await createTokenCount();
     }
 
-
-
     return "ok";
   } catch (error) {
     console.log(error);

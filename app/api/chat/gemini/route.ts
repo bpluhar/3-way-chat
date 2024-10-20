@@ -18,7 +18,6 @@ export async function POST(req: Request) {
     onFinish: async ({ usage }) => {
       const tokenCount = usage;
       try {
-
         await updateTokenCount({ google: tokenCount });
 
         // const record = await getTokenCount();
@@ -39,7 +38,6 @@ export async function POST(req: Request) {
         //   };
         //   await updateTokenCount({ google: newTokenCount });
         // }
-
       } catch (error: unknown) {
         console.error("Error updating token count in PocketBase:", error);
       }

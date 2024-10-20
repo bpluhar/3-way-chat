@@ -20,8 +20,6 @@ export async function POST(req: Request) {
       const tokenCount = usage; // if you want to call the usage tokens onCompletion + save stuff etc
       //console.log('Token usage by Google:', JSON.stringify(tokenCount, null, 2));
       try {
-
-
         await updateTokenCount({ anthropic: tokenCount });
 
         // const record = await getTokenCount();
@@ -44,7 +42,6 @@ export async function POST(req: Request) {
         //   };
         //   await updateTokenCount({ anthropic: newTokenCount });
         // }
-
       } catch (error: unknown) {
         console.error("Error updating token count in PocketBase:", error);
       }

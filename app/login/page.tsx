@@ -21,7 +21,8 @@ export default function Page() {
       <div className="w-full max-w-md p-6 m-4 space-y-8 bg-[#060F11] rounded-xl shadow-lg border border-zinc-700">
         <h2 className="text-3xl font-bold text-center text-yellow-500 relative">
           <span className="relative z-10">Login</span>
-          <span className="absolute w-1/3 left-1/2 -translate-x-1/2 inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
+          <span className="absolute w-1/3 left-1/2 -translate-x-1/2 inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
+          </span>
         </h2>
         <form action={action} className="space-y-6">
           <div>
