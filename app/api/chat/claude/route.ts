@@ -24,10 +24,10 @@ export async function POST(req: Request) {
 
         if (record && record.anthropic) {
           const newTokenCount = {
-            promptTokens: record.anthropic.promptTokens +
-              tokenCount.promptTokens,
-            completionTokens: record.anthropic.completionTokens +
-              tokenCount.completionTokens,
+            promptTokens:
+              record.anthropic.promptTokens + tokenCount.promptTokens,
+            completionTokens:
+              record.anthropic.completionTokens + tokenCount.completionTokens,
             totalTokens: record.anthropic.totalTokens + tokenCount.totalTokens,
           };
 

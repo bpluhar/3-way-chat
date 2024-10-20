@@ -22,8 +22,8 @@ export async function POST(req: Request) {
         if (record && record.google) {
           const newTokenCount = {
             promptTokens: record.google.promptTokens + tokenCount.promptTokens,
-            completionTokens: record.google.completionTokens +
-              tokenCount.completionTokens,
+            completionTokens:
+              record.google.completionTokens + tokenCount.completionTokens,
             totalTokens: record.google.totalTokens + tokenCount.totalTokens,
           };
           await updateTokenCount({ google: newTokenCount });

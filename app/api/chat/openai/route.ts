@@ -23,8 +23,8 @@ export async function POST(req: Request) {
         if (record && record.openai) {
           const newTokenCount = {
             promptTokens: record.openai.promptTokens + tokenCount.promptTokens,
-            completionTokens: record.openai.completionTokens +
-              tokenCount.completionTokens,
+            completionTokens:
+              record.openai.completionTokens + tokenCount.completionTokens,
             totalTokens: record.openai.totalTokens + tokenCount.totalTokens,
           };
           await updateTokenCount({ openai: newTokenCount });

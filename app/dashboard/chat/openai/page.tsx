@@ -45,11 +45,12 @@ export default function Home() {
     let endpointsToUse: string[];
 
     // Check if the submitted chat's sync is disabled
-    const submittedModel = Object.keys(endpoints).find((key) =>
-      endpoints[key as keyof typeof endpoints] === apiEndpoint
+    const submittedModel = Object.keys(endpoints).find(
+      (key) => endpoints[key as keyof typeof endpoints] === apiEndpoint,
     );
     if (
-      submittedModel && !syncStates[submittedModel as keyof typeof syncStates]
+      submittedModel &&
+      !syncStates[submittedModel as keyof typeof syncStates]
     ) {
       // If sync is disabled for the submitted chat, only use its endpoint
       endpointsToUse = [apiEndpoint];
@@ -75,11 +76,10 @@ export default function Home() {
       if (!setMessages) return;
 
       const aiMessageId = uuidv4();
-      setMessages(
-        (
-          prev,
-        ) => [...prev, { role: "assistant", content: "", id: aiMessageId }],
-      );
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "", id: aiMessageId },
+      ]);
 
       try {
         const response = await fetch(endpoint, {
@@ -147,8 +147,7 @@ export default function Home() {
           <div className="flex items-center justify-between p-4 border-b border-zinc-700">
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">OpenAI</span>
-              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
-              </span>
+              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
               {/* <TokenCounter provider="openai" /> */}
             </h2>
           </div>

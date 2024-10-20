@@ -12,9 +12,9 @@ interface OpenAIChatProps {
 
 export default function OpenAIChat({ messages }: OpenAIChatProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [formattedMessages, setFormattedMessages] = useState<
-    { [key: string]: string }
-  >({});
+  const [formattedMessages, setFormattedMessages] = useState<{
+    [key: string]: string;
+  }>({});
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -49,9 +49,10 @@ export default function OpenAIChat({ messages }: OpenAIChatProps) {
   return (
     <div className="flex-grow overflow-auto p-4">
       {messages.map((m) => {
-        const content = m.role === "assistant"
-          ? m.content.replace(/\n\nTokens: \d+ input, \d+ output$/, "")
-          : m.content;
+        const content =
+          m.role === "assistant"
+            ? m.content.replace(/\n\nTokens: \d+ input, \d+ output$/, "")
+            : m.content;
 
         return (
           <div

@@ -17,9 +17,5 @@ export default function RootLayout({
   // but we must make typescript happy
   if (!cookie) throw new Error("Not logged in");
 
-  return (
-    <>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
