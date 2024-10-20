@@ -14,22 +14,26 @@ type TokenCountUpdate = {
 
 export async function updateTokenCount(tokenCount: TokenCountUpdate) {
   const pb = await initPocketbaseFromCookie();
-  
+
   try {
     if (!pb.authStore.model?.id) {
-      throw new Error('User not authenticated');
+      throw new Error("User not authenticated");
     }
 
-    const existingRecord = await pb.collection('token_counts').getOne(pb.authStore.model.id).catch(() => null);
+    const existingRecord = await pb.collection("token_counts").getOne(
+      pb.authStore.model.id,
+    ).catch(() => null);
 
     const updatedData: TokenCountUpdate = {};
 
     for (const [provider, count] of Object.entries(tokenCount)) {
       if (existingRecord && existingRecord[provider]) {
         updatedData[provider as keyof TokenCountUpdate] = {
-          promptTokens: existingRecord[provider].promptTokens + count.promptTokens,
-          completionTokens: existingRecord[provider].completionTokens + count.completionTokens,
-          totalTokens: existingRecord[provider].totalTokens + count.totalTokens
+          promptTokens: existingRecord[provider].promptTokens +
+            count.promptTokens,
+          completionTokens: existingRecord[provider].completionTokens +
+            count.completionTokens,
+          totalTokens: existingRecord[provider].totalTokens + count.totalTokens,
         };
       } else {
         updatedData[provider as keyof TokenCountUpdate] = count;
@@ -37,15 +41,18 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
     }
 
     if (existingRecord) {
-      await pb.collection('token_counts').update(pb.authStore.model.id, updatedData);
+      await pb.collection("token_counts").update(
+        pb.authStore.model.id,
+        updatedData,
+      );
     } else {
-      await pb.collection('token_counts').create({
+      await pb.collection("token_counts").create({
         ...updatedData,
-        id: pb.authStore.model.id
+        id: pb.authStore.model.id,
       });
     }
   } catch (error) {
-    console.error('Error updating token count:', error);
+    console.error("Error updating token count:", error);
     throw error;
   }
 
@@ -57,13 +64,15 @@ export async function getTokenCount() {
 
   try {
     if (!pb.authStore.model?.id) {
-      throw new Error('User not authenticated');
+      throw new Error("User not authenticated");
     }
 
-    const record = await pb.collection('token_counts').getOne(pb.authStore.model.id);
+    const record = await pb.collection("token_counts").getOne(
+      pb.authStore.model.id,
+    );
     return record;
   } catch (error) {
-    console.error('Error getting token count:', error);
+    console.error("Error getting token count:", error);
     return null;
   }
 }

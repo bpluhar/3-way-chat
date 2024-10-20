@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 
 interface SharedInputFormProps {
   onSubmit: (input: string) => void;
@@ -14,9 +14,9 @@ export default function SharedInputForm({
   onSubmit,
   synced,
   syncedInput,
-  onSyncedInputChange
+  onSyncedInputChange,
 }: SharedInputFormProps) {
-  const [localInput, setLocalInput] = useState('');
+  const [localInput, setLocalInput] = useState("");
 
   useEffect(() => {
     if (synced) {
@@ -37,7 +37,7 @@ export default function SharedInputForm({
     const inputToSubmit = synced ? syncedInput : localInput;
     onSubmit(inputToSubmit);
     if (!synced) {
-      setLocalInput('');
+      setLocalInput("");
     }
   };
 
@@ -49,18 +49,21 @@ export default function SharedInputForm({
         placeholder="Say something..."
         onChange={(e) => {
           handleInputChange(e);
-          e.target.rows = Math.min(5, e.target.value.split('\n').length);
+          e.target.rows = Math.min(5, e.target.value.split("\n").length);
         }}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' && !e.shiftKey) {
+          if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>);
           }
         }}
         rows={1}
-        style={{ maxWidth: '100%', overflowWrap: 'break-word' }}
+        style={{ maxWidth: "100%", overflowWrap: "break-word" }}
       />
-      <button type="submit" className="py-2 px-4 bg-[#060F11] text-yellow-500 font-bold rounded-r-xl border border-yellow-500 transition-colors hover:bg-yellow-500 hover:text-[#060F11]">
+      <button
+        type="submit"
+        className="py-2 px-4 bg-[#060F11] text-yellow-500 font-bold rounded-r-xl border border-yellow-500 transition-colors hover:bg-yellow-500 hover:text-[#060F11]"
+      >
         Send
       </button>
     </form>
