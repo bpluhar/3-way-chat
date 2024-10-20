@@ -19,9 +19,9 @@ export default function Dashboard() {
         </button>
       </div>
 
-      <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-zinc-700 bg-[#060F11]">
+      <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-zinc-700 bg-[#060F11] gap-4">
         {/* OpenAI Chat Mobile */}
-        <div className="flex items-center justify-between p-4 m-4 border rounded-md border-zinc-700">
+        <div className="flex items-center justify-between p-4 mx-4 mt-4 border rounded-md border-zinc-700">
           <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
             <span className="relative z-10">OpenAI ChatGPT</span>
             {/* <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-lg rounded-md"></span> */}
@@ -53,7 +53,7 @@ export default function Dashboard() {
         </div>
 
         {/* Google Gemini Chat Mobile */}
-        <div className="flex items-center justify-between p-4 m-4 border rounded-md border-zinc-700">
+        <div className="flex items-center justify-between p-4 mx-4 border rounded-md border-zinc-700">
           <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
             <span className="relative z-10">Google Gemini</span>
             {/* <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-lg rounded-md"></span> */}
@@ -69,7 +69,7 @@ export default function Dashboard() {
         </div>
 
         {/* 3-Way Chat */}
-        <div className="flex items-center justify-between p-4 m-4 border rounded-md border-zinc-700">
+        <div className="flex items-center justify-between p-4 mx-4 border rounded-md border-zinc-700">
           <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
             <span className="relative z-10">3-Way Chat</span>
             {/* <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-lg rounded-md"></span> */}
@@ -83,6 +83,8 @@ export default function Dashboard() {
             Chat
           </Link>
         </div>
+
+
       </div>
     </div>
   );
