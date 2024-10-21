@@ -5,7 +5,7 @@ import OpenAIChat from "@/components/OpenAIChat";
 import ClaudeChat from "@/components/ClaudeChat";
 import GeminiChat from "@/components/GeminiChat";
 import SharedInputForm from "@/components/SharedInputForm";
-//import TokenCounter from '@/components/TokenCounter';
+import TokenCounter from "@/components/TokenCounter";
 import { Message } from "ai";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
@@ -144,7 +144,7 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full h-dvh bg-[#101516] text-zinc-100 p-4">
       <div className="w-full mb-4 p-4 bg-[#060F11] rounded-lg border border-zinc-700 flex justify-between items-center">
-      <h1 className="text-xl font-bold text-yellow-500">Chat</h1>
+        <h1 className="text-xl font-bold text-yellow-500">Chat</h1>
         <Link
           href="/dashboard"
           className="bg-[#101516] hover:bg-[#1c2526] text-yellow-500 font-bold py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-[#060F11] border border-yellow-500"
@@ -157,8 +157,9 @@ export default function Home() {
           <div className="flex items-center justify-between p-4 border-b border-zinc-700">
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">OpenAI</span>
-              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
-              {/* <TokenCounter provider="openai" /> */}
+              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
+              </span>
+              <TokenCounter provider="openai" />
             </h2>
 
             <label className="flex items-center cursor-pointer">
@@ -174,12 +175,14 @@ export default function Home() {
                   className={`block w-10 h-4 rounded-full transition-colors ${
                     syncStates.openai ? "bg-yellow-500" : "bg-[#2f3030]"
                   }`}
-                ></div>
+                >
+                </div>
                 <div
                   className={`absolute -left-1 -top-1 bg-white w-6 h-6 rounded-full transition-transform ${
                     syncStates.openai ? "transform translate-x-6" : ""
                   }`}
-                ></div>
+                >
+                </div>
               </div>
             </label>
           </div>
@@ -200,8 +203,9 @@ export default function Home() {
           <div className="flex items-center justify-between p-4 border-b border-zinc-700">
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">Anthropic</span>
-              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
-              {/* <TokenCounter provider="anthropic" /> */}
+              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
+              </span>
+              <TokenCounter provider="anthropic" />
             </h2>
             <label className="flex items-center cursor-pointer">
               <span className="mr-2 text-yellow-500">Sync</span>
@@ -216,12 +220,14 @@ export default function Home() {
                   className={`block w-10 h-4 rounded-full transition-colors ${
                     syncStates.claude ? "bg-yellow-500" : "bg-[#2f3030]"
                   }`}
-                ></div>
+                >
+                </div>
                 <div
                   className={`absolute -left-1 -top-1 bg-white w-6 h-6 rounded-full transition-transform ${
                     syncStates.claude ? "transform translate-x-6" : ""
                   }`}
-                ></div>
+                >
+                </div>
               </div>
             </label>
           </div>
@@ -242,8 +248,9 @@ export default function Home() {
           <div className="flex items-center justify-between p-4 border-b border-zinc-700">
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">Google</span>
-              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
-              {/* <TokenCounter provider="google" /> */}
+              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
+              </span>
+              <TokenCounter provider="google" />
             </h2>
             <label className="flex items-center cursor-pointer">
               <span className="mr-2 text-yellow-500">Sync</span>
@@ -258,12 +265,14 @@ export default function Home() {
                   className={`block w-10 h-4 rounded-full transition-colors ${
                     syncStates.gemini ? "bg-yellow-500" : "bg-[#2f3030]"
                   }`}
-                ></div>
+                >
+                </div>
                 <div
                   className={`absolute -left-1 -top-1 bg-white w-6 h-6 rounded-full transition-transform ${
                     syncStates.gemini ? "transform translate-x-6" : ""
                   }`}
-                ></div>
+                >
+                </div>
               </div>
             </label>
           </div>

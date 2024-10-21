@@ -6,21 +6,26 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { initPocketbaseFromCookie } from "../lib/pb";
 import { createTokenCount } from "../lib/actions";
+import { loginSchema } from "../lib/schemas";
+import { z } from "zod";
 
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
   try {
+    const validatedFields = loginSchema.parse({
+      email: formData.get("email"),
+      password: formData.get("password"),
+    });
+
     const pb = await initPocketbaseFromCookie();
 
-    // I would create a zod schema here to validate the email and password.
-    // Too lazy for now.... look above for example of data validation.
     await pb
       .collection("users")
       .authWithPassword(
-        formData.get("email") as string,
-        formData.get("password") as string,
+        validatedFields.email,
+        validatedFields.password,
       );
 
     if (pb.authStore.isValid) {
@@ -30,8 +35,12 @@ export async function authenticate(
 
     return "ok";
   } catch (error) {
-    console.log(error);
-
+    if (error instanceof z.ZodError) {
+      // Handle validation errors
+      console.error("Validation error:", error.errors);
+      return "ValidationError";
+    }
+    console.error("Authentication error:", error);
     return "AuthError";
   }
 }

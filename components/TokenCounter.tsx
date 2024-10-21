@@ -21,6 +21,7 @@ export default function TokenCounter({ provider }: TokenCounterProps) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
+
         if (isMounted) {
           setTokenCount(data[provider].totalTokens);
           setError(null);
@@ -44,7 +45,7 @@ export default function TokenCounter({ provider }: TokenCounterProps) {
 
   return (
     <div className="flex flex-col space-y-2">
-      {error && <div className="text-red-500">{error}</div>}
+      {error && <div className="text-red-500 hidden">{error}</div>}
       <div className="text-sm text-yellow-500">
         {tokenCount > 0
           ? `Tokens Used: ${tokenCount.toLocaleString()}`

@@ -32,10 +32,10 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
     for (const [provider, count] of Object.entries(tokenCount)) {
       if (existingRecord && existingRecord[provider]) {
         updatedData[provider as keyof TokenCountUpdate] = {
-          promptTokens:
-            existingRecord[provider].promptTokens + count.promptTokens,
-          completionTokens:
-            existingRecord[provider].completionTokens + count.completionTokens,
+          promptTokens: existingRecord[provider].promptTokens +
+            count.promptTokens,
+          completionTokens: existingRecord[provider].completionTokens +
+            count.completionTokens,
           totalTokens: existingRecord[provider].totalTokens + count.totalTokens,
         };
       } else {

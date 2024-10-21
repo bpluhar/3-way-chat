@@ -3,7 +3,7 @@
 import { useState } from "react";
 import GeminiChat from "@/components/GeminiChat";
 import SharedInputForm from "@/components/SharedInputForm";
-//import TokenCounter from '@/components/TokenCounter';
+import TokenCounter from "@/components/TokenCounter";
 import { Message } from "ai";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
@@ -149,8 +149,9 @@ export default function Home() {
           <div className="flex items-center justify-between p-4 border-b border-zinc-700">
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">Google (gemini-1.5-flash)</span>
-              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
-              {/* <TokenCounter provider="google" /> */}
+              <TokenCounter provider="google" />
+              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
+              </span>
             </h2>
 
             {/* Token Counter Here */}
