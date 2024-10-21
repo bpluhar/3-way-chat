@@ -78,18 +78,6 @@ export async function getTokenCount() {
       .collection("token_counts")
       .getOne(pb.authStore.model.id);
 
-    const timestamp = new Date().toLocaleString('en-US', {
-      month: '2-digit',
-      day: '2-digit',
-      year: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false,
-    }).replace(/(\d+)\/(\d+)\/(\d+),\s(\d+):(\d+):(\d+)/, '$1/$2/$3 - $4:$5:$6');
-
-    console.info('\x1b[32m%s\x1b[0m', `[${timestamp}] > Token count retrieved successfully`);
-
     return record;
   } catch (error) {
     const timestamp = new Date().toLocaleString('en-US', {
