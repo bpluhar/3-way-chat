@@ -12,6 +12,11 @@ type TokenCountUpdate = {
   google?: TokenCount;
 };
 
+export async function getUser() {
+  const pb = await initPocketbaseFromCookie();
+  return pb.authStore.model;
+}
+
 export async function updateTokenCount(tokenCount: TokenCountUpdate) {
   const pb = await initPocketbaseFromCookie();
 

@@ -1,22 +1,30 @@
-"use client";
+//"use client";
 
-import { logout } from "../auth/action";
+import LogoutButton from "@/components/LogoutButton";
 import Link from "next/link";
-export default function Dashboard() {
+import Image from "next/image";
+import { getUser } from "@/app/lib/actions";
+
+export default async function Dashboard() {
+
+  const user = await getUser();
+
+  const avatarUrl = `https://pocket.leaselogic.app/api/files/${user?.collectionId}/${user?.id}/${user?.avatar}`;
+  console.log(`avatarUrl: ${avatarUrl}`);
+
   return (
+    
     <div className="flex flex-col w-full h-dvh bg-[#101516] text-zinc-100 p-4">
+      {avatarUrl.length > `https://pocket.leaselogic.app/api/files/_pb_users_auth_/${user?.id}/`.length ? (
+        <Image src={avatarUrl} alt="User Avatar" width={50} height={50} className="rounded-lg m-2" />
+      ) : null}
       <div className="w-full mb-4 p-4 bg-[#060F11] rounded-lg border border-zinc-700 flex justify-between items-center">
         <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
           <span className="relative z-10">Dashboard</span>
           <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
         </h2>
 
-        <button
-          onClick={() => logout()}
-          className="bg-[#101516] hover:bg-[#1c2526] text-red-800 font-bold py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-[#060F11] border border-red-800"
-        >
-          Logout
-        </button>
+        <LogoutButton />
       </div>
 
       <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-zinc-700 bg-[#060F11] gap-4">

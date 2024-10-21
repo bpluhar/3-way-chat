@@ -1,16 +1,13 @@
 // ./middleware.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import { isTokenExpired } from "pocketbase";
-import PocketBase from "pocketbase";
 import { initPocketBaseFromRequest } from "./app/lib/pb";
 
-const pb = new PocketBase("http://127.0.0.1:8090");
 
 export async function middleware(request: NextRequest) {
   const pb = await initPocketBaseFromRequest(request);
 
-  if (!pb.authStore.isValid) {
+  if (!pb.authStore.isValid && request.nextUrl.pathname.includes("/dashboard")) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
