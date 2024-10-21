@@ -1,10 +1,10 @@
 //"use client";
 
 import LogoutButton from "@/components/LogoutButton";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import DashboardMenuBar from "@/components/DashboardMenuBar";
-import DashboardDropdownMenu from "@/components/DashboardDropdownMenu";
 
 import Link from "next/link";
 import { getUser } from "@/app/lib/actions";
@@ -23,11 +23,10 @@ export default async function Dashboard() {
 
   return (
     <div className="flex flex-col w-full h-dvh bg-white text-black p-4">
-      {
-        /* {avatarUrl.length > `https://pocket.leaselogic.app/api/files/_pb_users_auth_/${user?.id}/`.length ? (
+      
+        {avatarUrl.length > `https://pocket.leaselogic.app/api/files/_pb_users_auth_/${user?.id}/`.length ? (
         <Image src={avatarUrl} alt="User Avatar" width={50} height={50} className="rounded-lg m-2" />
-      ) : null} */
-      }
+      ) : null}
 
       {/* Dashboard Menu Bar */}
       <div className="flex w-full justify-between mb-4">

@@ -62,6 +62,8 @@ export default function OpenAIUsageChart() {
     return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
   }, [])
 
+  
+
   return (
     <Card className="flex flex-col sm:w-1/3">
       <CardHeader className="items-center pb-0">

@@ -1,4 +1,5 @@
-import { initPocketbaseFromCookie } from "./pb";
+import { initPocketbaseFromCookie, initPocketBaseFromRequest } from "./pb";
+import { NextRequest } from "next/server";
 
 type TokenCount = {
   promptTokens: number;
@@ -17,8 +18,8 @@ export async function getUser() {
   return pb.authStore.model;
 }
 
-export async function getTokenUsageLogs() {
-  const pb = await initPocketbaseFromCookie();
+export async function getTokenUsageLogs(request: NextRequest) {
+  const pb = await initPocketBaseFromRequest(request);
   return pb.collection("token_usage_logs").getFullList({
     filter: `user_id = "${pb.authStore.model?.id}"`,
     sort: "-created",
