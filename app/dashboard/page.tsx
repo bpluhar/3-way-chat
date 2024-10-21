@@ -1,6 +1,10 @@
 //"use client";
 
 import LogoutButton from "@/components/LogoutButton";
+
+import { Button } from "@/components/ui/button";
+import DashboardMenuBar from "@/components/DashboardMenuBar";
+
 import Link from "next/link";
 import Image from "next/image";
 import { getUser } from "@/app/lib/actions";
@@ -23,6 +27,17 @@ export default async function Dashboard() {
           <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
         </h2>
 
+        <DashboardMenuBar />
+
+        {/* <Menubar>
+          <MenubarMenu>
+            <MenubarTrigger className="text-black">Settings</MenubarTrigger>
+            <MenubarContent>            
+              <MenubarItem className="text-red-500" onClick={() => logout()}>Logout</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>   */}
+
         <LogoutButton />
       </div>
 
@@ -35,11 +50,14 @@ export default async function Dashboard() {
             {/* <TokenCounter provider="openai" /> */}
           </h2>
 
-          <Link
+          {/* <Link
             href="/dashboard/chat/openai"
             className="px-6 py-2 rounded-lg bg-yellow-500 text-zinc-900"
           >
             Chat
+          </Link> */}
+          <Link href="/dashboard/chat/openai">
+            <Button variant="default">Chat</Button>
           </Link>
         </div>
 
@@ -51,11 +69,8 @@ export default async function Dashboard() {
             {/* <TokenCounter provider="anthropic" /> */}
           </h2>
 
-          <Link
-            href="/dashboard/chat/anthropic"
-            className="px-6 py-2 rounded-lg bg-yellow-500 text-zinc-900"
-          >
-            Chat
+          <Link href="/dashboard/chat/anthropic">
+            <Button variant="default">Chat</Button>
           </Link>
         </div>
 
@@ -67,11 +82,8 @@ export default async function Dashboard() {
             {/* <TokenCounter provider="openai" /> */}
           </h2>
 
-          <Link
-            href="/dashboard/chat/google"
-            className="px-6 py-2 rounded-lg bg-yellow-500 text-zinc-900"
-          >
-            Chat
+          <Link href="/dashboard/chat/google">
+            <Button variant="default">Chat</Button>
           </Link>
         </div>
 
@@ -83,11 +95,8 @@ export default async function Dashboard() {
             {/* <TokenCounter provider="openai" /> */}
           </h2>
 
-          <Link
-            href="/dashboard/chat"
-            className="px-6 py-2 rounded-lg bg-yellow-500 text-zinc-900"
-          >
-            Chat
+          <Link href="/dashboard/chat">
+            <Button variant="default">Chat</Button>
           </Link>
         </div>
       </div>
