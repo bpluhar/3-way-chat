@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -6,6 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { OpenAIUsageChart } from "@/components/OpenAIUsageChart";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -19,13 +23,11 @@ export default function OpenAICard() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Prompt Tokens: 0</p>
-        <p>Completion Tokens: 0</p>
-        <p>Total Tokens: 0</p>
+        <OpenAIUsageChart />
       </CardContent>
       <CardFooter>
         <Link href="/dashboard/chat/openai">
-          <Button variant="default">Chat</Button>
+          <Button variant="default">Chat with OpenAI</Button>
         </Link>
       </CardFooter>
     </Card>

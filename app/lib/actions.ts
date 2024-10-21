@@ -17,6 +17,36 @@ export async function getUser() {
   return pb.authStore.model;
 }
 
+export async function getTokenUsageLogs() {
+  const pb = await initPocketbaseFromCookie();
+  return pb.collection("token_usage_logs").getFullList({
+    filter: `user_id = "${pb.authStore.model?.id}"`,
+    sort: "-created",
+  });
+}
+
+export async function updateTokenUsageLogs(tokenCount: TokenCountUpdate) {
+  const pb = await initPocketbaseFromCookie();
+  
+  try {
+    if (!pb.authStore.model?.id) {
+      throw new Error("User not authenticated");
+    }
+
+    await pb.collection("token_usage_logs").create({
+      token_count: tokenCount,
+      user_id: pb.authStore.model?.id,
+    });
+
+    
+
+  } catch (error) {
+    console.error("Error updating token usage logs:", error);
+    throw error;
+  }
+
+}
+
 export async function updateTokenCount(tokenCount: TokenCountUpdate) {
   const pb = await initPocketbaseFromCookie();
 
@@ -52,6 +82,9 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
       await pb
         .collection("token_counts")
         .update(pb.authStore.model.id, updatedData);
+
+      await updateTokenUsageLogs(tokenCount);
+
     } else {
       await pb.collection("token_counts").create({
         ...updatedData,

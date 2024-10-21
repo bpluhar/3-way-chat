@@ -6,6 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function GoogleCard() {
   return (
@@ -22,7 +24,9 @@ export default function GoogleCard() {
         <p>Total Tokens: 0</p>
       </CardContent>
       <CardFooter>
-        <p></p>
+      <Link href="/dashboard/chat/google">
+          <Button variant="default">Chat with Google</Button>
+        </Link>
       </CardFooter>
     </Card>
   );

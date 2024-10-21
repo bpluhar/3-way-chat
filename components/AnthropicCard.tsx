@@ -6,6 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function AnthropicCard() {
   return (
@@ -22,7 +24,9 @@ export default function AnthropicCard() {
         <p>Total Tokens: 0</p>
       </CardContent>
       <CardFooter>
-        <p></p>
+      <Link href="/dashboard/chat/anthropic">
+          <Button variant="default">Chat with Claude</Button>
+        </Link>
       </CardFooter>
     </Card>
   );

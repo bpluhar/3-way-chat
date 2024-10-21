@@ -3,7 +3,13 @@
 import { logout } from "@/app/auth/action";
 import { Button } from "@/components/ui/button";
 
-export default function LogoutButton() {
+
+
+export default async function LogoutButton() {
+
+
+
+
   return (
     //   <button
     //   onClick={() => logout()}
