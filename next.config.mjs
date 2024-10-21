@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['pocket.leaselogic.app'],
+    remotePatterns: [
+      {
+        hostname: 'pocket.leaselogic.app',
+      },
+    ],
   },
 };
 
