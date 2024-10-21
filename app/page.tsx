@@ -13,7 +13,7 @@ export default function Home() {
           Get Started
         </button>
       </Link>
-      <Image src="/images/ezgg.png" alt="UI preview" width={1024} height={576} className="mt-8" />
+      <Image src="/images/ezgg.png" alt="UI preview" width={1024} height={576} className="m-8 rounded-lg " />
     </div>
   );
 }

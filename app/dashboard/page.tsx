@@ -10,7 +10,6 @@ export default async function Dashboard() {
   const user = await getUser();
 
   const avatarUrl = `https://pocket.leaselogic.app/api/files/${user?.collectionId}/${user?.id}/${user?.avatar}`;
-  console.log(`avatarUrl: ${avatarUrl}`);
 
   return (
     
