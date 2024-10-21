@@ -64,10 +64,10 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
     for (const [provider, count] of Object.entries(tokenCount)) {
       if (existingRecord && existingRecord[provider]) {
         updatedData[provider as keyof TokenCountUpdate] = {
-          promptTokens: existingRecord[provider].promptTokens +
-            count.promptTokens,
-          completionTokens: existingRecord[provider].completionTokens +
-            count.completionTokens,
+          promptTokens:
+            existingRecord[provider].promptTokens + count.promptTokens,
+          completionTokens:
+            existingRecord[provider].completionTokens + count.completionTokens,
           totalTokens: existingRecord[provider].totalTokens + count.totalTokens,
         };
       } else {
@@ -109,18 +109,20 @@ export async function getTokenCount() {
 
     return record;
   } catch (error) {
-    const timestamp = new Date().toLocaleString("en-US", {
-      month: "2-digit",
-      day: "2-digit",
-      year: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    }).replace(
-      /(\d+)\/(\d+)\/(\d+),\s(\d+):(\d+):(\d+)/,
-      "$1/$2/$3 - $4:$5:$6",
-    );
+    const timestamp = new Date()
+      .toLocaleString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      })
+      .replace(
+        /(\d+)\/(\d+)\/(\d+),\s(\d+):(\d+):(\d+)/,
+        "$1/$2/$3 - $4:$5:$6",
+      );
 
     console.error(
       "\x1b[31m%s\x1b[0m",
@@ -146,7 +148,9 @@ export async function createTokenCount() {
     if (error instanceof Error && "status" in error && error.status !== 400) {
       console.error("Error creating token count in PocketBase");
     } else if (
-      error instanceof Error && "status" in error && error.status === 400
+      error instanceof Error &&
+      "status" in error &&
+      error.status === 400
     ) {
       console.error("Token count already exists in PocketBase");
     }

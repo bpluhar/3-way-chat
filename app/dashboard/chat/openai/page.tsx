@@ -148,8 +148,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">OpenAI (gpt-4o-mini)</span>
               <TokenCounter provider="openai" />
-              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
-              </span>
+              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
             </h2>
           </div>
           <div className="flex-grow overflow-hidden flex flex-col">

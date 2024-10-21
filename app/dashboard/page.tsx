@@ -16,24 +16,21 @@ import GoogleUsageChart from "@/components/GoogleUsageChart";
 export default async function Dashboard() {
   const user = await getUser();
 
-  const avatarUrl =
-    `https://pocket.leaselogic.app/api/files/${user?.collectionId}/${user?.id}/${user?.avatar}`;
+  const avatarUrl = `https://pocket.leaselogic.app/api/files/${user?.collectionId}/${user?.id}/${user?.avatar}`;
 
   return (
     <div className="flex flex-col w-full h-dvh bg-white text-black p-4">
       {avatarUrl.length >
-          `https://pocket.leaselogic.app/api/files/_pb_users_auth_/${user?.id}/`
-            .length
-        ? (
-          <Image
-            src={avatarUrl}
-            alt="User Avatar"
-            width={50}
-            height={50}
-            className="rounded-lg m-2"
-          />
-        )
-        : null}
+      `https://pocket.leaselogic.app/api/files/_pb_users_auth_/${user?.id}/`
+        .length ? (
+        <Image
+          src={avatarUrl}
+          alt="User Avatar"
+          width={50}
+          height={50}
+          className="rounded-lg m-2"
+        />
+      ) : null}
 
       {/* Dashboard Menu Bar */}
       <div className="flex w-full justify-between mb-4">

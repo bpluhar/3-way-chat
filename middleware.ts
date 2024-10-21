@@ -7,7 +7,8 @@ export async function middleware(request: NextRequest) {
   const pb = await initPocketBaseFromRequest(request);
 
   if (
-    !pb.authStore.isValid && request.nextUrl.pathname.includes("/dashboard")
+    !pb.authStore.isValid &&
+    request.nextUrl.pathname.includes("/dashboard")
   ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
