@@ -12,9 +12,6 @@ body {
   }
 }
 
-
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -125,12 +122,8 @@ body {
     --chart-3: 350 80% 72%;
     --chart-4: 351 83% 82%;
     --chart-5: 352 83% 91%;
-    }
+  }
 }
-
-
-
-
 
 @layer base {
   * {
@@ -140,4 +133,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-

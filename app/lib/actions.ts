@@ -28,7 +28,7 @@ export async function getTokenUsageLogs(request: NextRequest) {
 
 export async function updateTokenUsageLogs(tokenCount: TokenCountUpdate) {
   const pb = await initPocketbaseFromCookie();
-  
+
   try {
     if (!pb.authStore.model?.id) {
       throw new Error("User not authenticated");
@@ -38,14 +38,10 @@ export async function updateTokenUsageLogs(tokenCount: TokenCountUpdate) {
       token_count: tokenCount,
       user_id: pb.authStore.model?.id,
     });
-
-    
-
   } catch (error) {
     console.error("Error updating token usage logs:", error);
     throw error;
   }
-
 }
 
 export async function updateTokenCount(tokenCount: TokenCountUpdate) {
@@ -85,7 +81,6 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
         .update(pb.authStore.model.id, updatedData);
 
       await updateTokenUsageLogs(tokenCount);
-
     } else {
       await pb.collection("token_counts").create({
         ...updatedData,
