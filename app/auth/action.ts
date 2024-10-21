@@ -23,10 +23,7 @@ export async function authenticate(
 
     await pb
       .collection("users")
-      .authWithPassword(
-        validatedFields.email,
-        validatedFields.password,
-      );
+      .authWithPassword(validatedFields.email, validatedFields.password);
 
     if (pb.authStore.isValid) {
       cookies().set("pb_auth", pb.authStore.exportToCookie());

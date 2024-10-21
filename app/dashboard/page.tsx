@@ -8,8 +8,7 @@ export default function Dashboard() {
       <div className="w-full mb-4 p-4 bg-[#060F11] rounded-lg border border-zinc-700 flex justify-between items-center">
         <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
           <span className="relative z-10">Dashboard</span>
-          <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
-          </span>
+          <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
         </h2>
 
         <button
