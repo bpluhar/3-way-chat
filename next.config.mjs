@@ -3,7 +3,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'pocket.leaselogic.app',
+        hostname: "pocket.leaselogic.app",
       },
     ],
   },

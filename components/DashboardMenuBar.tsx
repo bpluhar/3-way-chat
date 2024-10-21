@@ -1,17 +1,39 @@
 "use client";
 
-import { Menubar, MenubarTrigger, MenubarContent, MenubarItem, MenubarMenu } from "@/components/ui/menubar";
-import { logout } from "@/app/auth/action";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+import Link from "next/link";
+import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+
+
 
 export default function DashboardMenuBar() {
-    return (
-        <Menubar>
-          <MenubarMenu>
-            <MenubarTrigger className="text-black">Settings</MenubarTrigger>
-            <MenubarContent>            
-              <MenubarItem className="text-red-500" onClick={() => logout()}>Logout</MenubarItem>
-            </MenubarContent>
-          </MenubarMenu>
-        </Menubar>
-    );
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+      <NavigationMenuItem>
+        <Link href="/dashboard" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Home
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+        <Link href="/dashboard/settings" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Settings
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
 }

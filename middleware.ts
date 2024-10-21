@@ -3,11 +3,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { initPocketBaseFromRequest } from "./app/lib/pb";
 
-
 export async function middleware(request: NextRequest) {
   const pb = await initPocketBaseFromRequest(request);
 
-  if (!pb.authStore.isValid && request.nextUrl.pathname.includes("/dashboard")) {
+  if (
+    !pb.authStore.isValid && request.nextUrl.pathname.includes("/dashboard")
+  ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
