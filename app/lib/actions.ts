@@ -77,6 +77,9 @@ export async function getTokenCount() {
     const record = await pb
       .collection("token_counts")
       .getOne(pb.authStore.model.id);
+
+    console.info("Token count retrieved successfully");
+
     return record;
   } catch (error) {
     console.error("Error getting token count:", error);
@@ -94,9 +97,13 @@ export async function createTokenCount() {
       anthropic: { completionTokens: 0, promptTokens: 0, totalTokens: 0 },
       google: { completionTokens: 0, promptTokens: 0, totalTokens: 0 },
     });
+
+    console.info("Token count created successfully");
   } catch (error) {
-    if (error instanceof Error && "status" in error && error.status === 400) {
-      console.error("Error creating token count in PocketBase:", error);
+    if (error instanceof Error && "status" in error && error.status !== 400) {
+      console.error("Error creating token count in PocketBase");
+    } else if (error instanceof Error && "status" in error && error.status === 400) {
+      console.error("Token count already exists in PocketBase");
     }
   }
 }

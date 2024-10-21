@@ -5,7 +5,7 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { initPocketbaseFromCookie } from "../lib/pb";
-import { createTokenCount } from "../lib/actions";
+import { createTokenCount, getTokenCount } from "../lib/actions";
 import { loginSchema } from "../lib/schemas";
 import { z } from "zod";
 
@@ -24,12 +24,15 @@ export async function authenticate(
     await pb
       .collection("users")
       .authWithPassword(validatedFields.email, validatedFields.password);
-
-    
       
     if (pb.authStore.isValid) {
       cookies().set("pb_auth", pb.authStore.exportToCookie());
-      await createTokenCount();
+
+      try {
+        await getTokenCount();
+      } catch {
+        await createTokenCount();
+      }
     }
 
     return "ok";
