@@ -1,13 +1,11 @@
 //"use client";
 
 import LogoutButton from "@/components/LogoutButton";
-import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import DashboardMenuBar from "@/components/DashboardMenuBar";
 
 import Link from "next/link";
-import { getUser } from "@/app/lib/actions";
 
 import OpenAIUsageChart from "@/components/OpenAIUsageChart";
 import AnthropicUsageChart from "@/components/AnthropicUsageChart";

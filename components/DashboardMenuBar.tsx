@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { getUser } from "@/app/lib/actions";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Image from "next/image";
 
 export default async function DashboardMenuBar() {
   const user = await getUser();
@@ -23,12 +23,8 @@ export default async function DashboardMenuBar() {
           `https://pocket.leaselogic.app/api/files/_pb_users_auth_/${user?.id}/`
             .length
         ? (
-          <Avatar>
-            <AvatarImage src={avatarUrl} alt="User Avatar" />
-            <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
-          </Avatar>
-        )
-        : null}
+        <Image src={avatarUrl} alt="User Avatar" width={40} height={40} className="rounded-full" />
+      ) : null}
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -39,14 +35,14 @@ export default async function DashboardMenuBar() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/dashboard/usage" legacyBehavior passHref>
+            <Link href="#" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Usage
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/dashboard/settings" legacyBehavior passHref>
+            <Link href="#" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Settings
               </NavigationMenuLink>
