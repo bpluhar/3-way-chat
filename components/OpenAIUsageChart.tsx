@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic';
-import { getTokenUsageLogs } from '@/app/lib/actions';
-import UsageChartSkeleton from './UsageChartSkeleton';
+import dynamic from "next/dynamic";
+import { getTokenUsageLogs } from "@/app/lib/actions";
+import UsageChartSkeleton from "./UsageChartSkeleton";
 
 const ClientSideOpenAIUsageChart = dynamic(
-  () => import('./ClientSideOpenAIUsageChart'),
-  { ssr: false, loading: () => <UsageChartSkeleton /> }
+  () => import("./ClientSideOpenAIUsageChart"),
+  { ssr: false, loading: () => <UsageChartSkeleton /> },
 );
 
 type TokenUsageLogCount = {

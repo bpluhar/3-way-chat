@@ -14,11 +14,8 @@ import AnthropicUsageChart from "@/components/AnthropicUsageChart";
 import GoogleUsageChart from "@/components/GoogleUsageChart";
 
 export default async function Dashboard() {
-
   return (
     <div className="flex flex-col w-full h-dvh bg-white text-black p-4">
-      
-
       {/* Dashboard Menu Bar */}
       <div className="flex w-full justify-between mb-4">
         <DashboardMenuBar />

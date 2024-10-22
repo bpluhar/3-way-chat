@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
 import React, { useMemo } from "react";
-import { PieChart, Pie, Label } from 'recharts';
+import { Label, Pie, PieChart } from "recharts";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -68,21 +68,40 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function ClientSideAnthropicUsageChart({ usageStats }: { usageStats: TokenUsageLog[] }) {
-
+export default function ClientSideAnthropicUsageChart(
+  { usageStats }: { usageStats: TokenUsageLog[] },
+) {
   const chartData: ChartDataItem[] = useMemo(() => {
-    const totalPromptTokens = usageStats.reduce((sum, log) => sum + (log.token_count.anthropic?.promptTokens || 0), 0);
-    const totalCompletionTokens = usageStats.reduce((sum, log) => sum + (log.token_count.anthropic?.completionTokens || 0), 0);
-    
+    const totalPromptTokens = usageStats.reduce(
+      (sum, log) => sum + (log.token_count.anthropic?.promptTokens || 0),
+      0,
+    );
+    const totalCompletionTokens = usageStats.reduce(
+      (sum, log) => sum + (log.token_count.anthropic?.completionTokens || 0),
+      0,
+    );
+
     return [
-      { name: "promptTokens", value: totalPromptTokens, fill: chartConfig.promptTokens.color },
-      { name: "completionTokens", value: totalCompletionTokens, fill: chartConfig.completionTokens.color },
+      {
+        name: "promptTokens",
+        value: totalPromptTokens,
+        fill: chartConfig.promptTokens.color,
+      },
+      {
+        name: "completionTokens",
+        value: totalCompletionTokens,
+        fill: chartConfig.completionTokens.color,
+      },
     ];
   }, [usageStats]);
 
-  const totalTokens = useMemo(() => 
-    usageStats.reduce((sum, log) => sum + (log.token_count.anthropic?.totalTokens || 0), 0),
-    [usageStats]
+  const totalTokens = useMemo(
+    () =>
+      usageStats.reduce(
+        (sum, log) => sum + (log.token_count.anthropic?.totalTokens || 0),
+        0,
+      ),
+    [usageStats],
   );
 
   return (

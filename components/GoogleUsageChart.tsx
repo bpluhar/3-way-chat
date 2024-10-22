@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic';
-import { getTokenUsageLogs } from '@/app/lib/actions';
-import UsageChartSkeleton from './UsageChartSkeleton';
+import dynamic from "next/dynamic";
+import { getTokenUsageLogs } from "@/app/lib/actions";
+import UsageChartSkeleton from "./UsageChartSkeleton";
 
 const ClientSideGoogleUsageChart = dynamic(
-  () => import('./ClientSideGoogleUsageChart'),
-  { ssr: false, loading: () => <UsageChartSkeleton /> }
+  () => import("./ClientSideGoogleUsageChart"),
+  { ssr: false, loading: () => <UsageChartSkeleton /> },
 );
 
 type TokenUsageLogCount = {
