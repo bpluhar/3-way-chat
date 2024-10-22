@@ -151,7 +151,8 @@ export default function Home() {
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">Anthropic (claude-3-haiku)</span>
               <TokenCounter provider="anthropic" />
-              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
+              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
+              </span>
             </h2>
 
             {/* Token Count Here */}

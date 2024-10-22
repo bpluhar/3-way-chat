@@ -1,4 +1,5 @@
 import { initPocketbaseFromCookie } from "./pb";
+import { TokenUsageLog } from "@/types";
 
 type TokenCount = {
   promptTokens: number;
@@ -10,34 +11,6 @@ type TokenCountUpdate = {
   openai?: TokenCount;
   anthropic?: TokenCount;
   google?: TokenCount;
-};
-
-type TokenUsageLogCount = {
-  openai?: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
-  anthropic?: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
-  google?: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
-};
-
-type TokenUsageLog = {
-  collectionId: string;
-  collectionName: string;
-  created: string;
-  id: string;
-  token_count: TokenUsageLogCount[];
-  updated: string;
-  user_id: string;
 };
 
 export async function getUser() {
@@ -91,10 +64,10 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
     for (const [provider, count] of Object.entries(tokenCount)) {
       if (existingRecord && existingRecord[provider]) {
         updatedData[provider as keyof TokenCountUpdate] = {
-          promptTokens:
-            existingRecord[provider].promptTokens + count.promptTokens,
-          completionTokens:
-            existingRecord[provider].completionTokens + count.completionTokens,
+          promptTokens: existingRecord[provider].promptTokens +
+            count.promptTokens,
+          completionTokens: existingRecord[provider].completionTokens +
+            count.completionTokens,
           totalTokens: existingRecord[provider].totalTokens + count.totalTokens,
         };
       } else {

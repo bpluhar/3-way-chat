@@ -43,10 +43,12 @@ export default function UsageChartSkeleton() {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
-        {/* <ChartContainer
+        {
+          /* <ChartContainer
           className="mx-auto aspect-square max-h-[250px]"
           config={chartConfig}
-        > */}
+        > */
+        }
         <div className="relative w-full h-full flex items-center justify-center my-4 pb-8">
           <Skeleton className="w-44 h-44 rounded-full" />
         </div>

@@ -20,33 +20,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-type TokenUsageLogCount = {
-  openai?: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
-  anthropic?: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
-  google?: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
-};
-
-type TokenUsageLog = {
-  collectionId: string;
-  collectionName: string;
-  created: string;
-  id: string;
-  token_count: TokenUsageLogCount;
-  updated: string;
-  user_id: string;
-};
+import { TokenUsageLog } from "@/types";
 
 type ChartDataItem = {
   name: string;
@@ -68,11 +42,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function ClientSideOpenAIUsageChart({
-  usageStats,
-}: {
+interface ClientSideOpenAIUsageChartProps {
   usageStats: TokenUsageLog[];
-}) {
+}
+
+export default function ClientSideOpenAIUsageChart({ usageStats }: ClientSideOpenAIUsageChartProps) {
   const chartData: ChartDataItem[] = useMemo(() => {
     const totalPromptTokens = usageStats.reduce(
       (sum, log) => sum + (log.token_count.openai?.promptTokens || 0),

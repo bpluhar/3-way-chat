@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import { Label, Pie, PieChart } from "recharts";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { TokenUsageLog } from "@/types";
 
 import {
   Card,
@@ -19,34 +20,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
-type TokenUsageLogCount = {
-  openai?: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
-  anthropic?: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
-  google?: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
-};
-
-type TokenUsageLog = {
-  collectionId: string;
-  collectionName: string;
-  created: string;
-  id: string;
-  token_count: TokenUsageLogCount;
-  updated: string;
-  user_id: string;
-};
 
 type ChartDataItem = {
   name: string;
@@ -68,11 +41,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function ClientSideAnthropicUsageChart({
-  usageStats,
-}: {
+interface ClientSideAnthropicUsageChartProps {
   usageStats: TokenUsageLog[];
-}) {
+}
+
+export default function ClientSideAnthropicUsageChart({ usageStats }: ClientSideAnthropicUsageChartProps) {
   const chartData: ChartDataItem[] = useMemo(() => {
     const totalPromptTokens = usageStats.reduce(
       (sum, log) => sum + (log.token_count.anthropic?.promptTokens || 0),
