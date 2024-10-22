@@ -1,5 +1,4 @@
-import { initPocketbaseFromCookie, initPocketBaseFromRequest } from "./pb";
-import { NextRequest } from "next/server";
+import { initPocketbaseFromCookie } from "./pb";
 
 type TokenCount = {
   promptTokens: number;
@@ -13,13 +12,41 @@ type TokenCountUpdate = {
   google?: TokenCount;
 };
 
+type TokenUsageLogCount = {
+  openai?: {
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+  };
+  anthropic?: {
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+  };
+  google?: {
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+  };
+};
+
+type TokenUsageLog = {
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  id: string;
+  token_count: TokenUsageLogCount[];
+  updated: string;
+  user_id: string;
+};
+
 export async function getUser() {
   const pb = await initPocketbaseFromCookie();
   return pb.authStore.model;
 }
 
-export async function getTokenUsageLogs(request: NextRequest) {
-  const pb = await initPocketBaseFromRequest(request);
+export async function getTokenUsageLogs(): Promise<TokenUsageLog[]> {
+  const pb = await initPocketbaseFromCookie();
   return pb.collection("token_usage_logs").getFullList({
     filter: `user_id = "${pb.authStore.model?.id}"`,
     sort: "-created",
@@ -86,6 +113,7 @@ export async function updateTokenCount(tokenCount: TokenCountUpdate) {
         ...updatedData,
         id: pb.authStore.model.id,
       });
+      await updateTokenUsageLogs(tokenCount);
     }
   } catch (error) {
     console.error("Error updating token count:", error);

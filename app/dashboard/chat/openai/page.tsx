@@ -7,6 +7,7 @@ import TokenCounter from "@/components/TokenCounter";
 import { Message } from "ai";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [syncedInput, setSyncedInput] = useState("");
@@ -132,28 +133,24 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col w-full h-dvh bg-[#101516] text-zinc-100 p-4">
-      <div className="w-full mb-4 p-4 bg-[#060F11] rounded-lg border border-zinc-700 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-yellow-500">Chat</h1>
-        <Link
-          href="/dashboard"
-          className="bg-[#101516] hover:bg-[#1c2526] text-yellow-500 font-bold py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-[#060F11] border border-yellow-500"
-        >
-          Menu
+    <div className="flex flex-col w-full h-dvh bg-background text-foreground p-4">
+      <div className="w-full mb-4 p-4 bg-card rounded-lg border border-border flex justify-between items-center">
+        <h1 className="text-xl font-bold text-primary">Chat</h1>
+        <Link href="/dashboard">
+          <Button variant="outline">Menu</Button>
         </Link>
       </div>
       <div className="flex flex-row flex-grow overflow-hidden space-x-4">
-        <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-zinc-700 bg-[#060F11]">
-          <div className="flex items-center justify-between p-4 border-b border-zinc-700">
-            <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
+        <div className="flex-1 overflow-hidden flex flex-col rounded-lg border border-border bg-card">
+          <div className="flex items-center justify-between p-4 border-b border-border">
+            <h2 className="text-xl font-bold text-primary rounded-md relative">
               <span className="relative z-10">OpenAI (gpt-4o-mini)</span>
               <TokenCounter provider="openai" />
-              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
             </h2>
           </div>
           <div className="flex-grow overflow-hidden flex flex-col">
             <OpenAIChat messages={openAIMessages} />
-            <div className="p-4 border-t border-zinc-700">
+            <div className="p-4 border-t border-border">
               <SharedInputForm
                 onSubmit={handleSubmit("/api/chat/openai")}
                 synced={syncStates.openai}
