@@ -150,8 +150,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-yellow-500 rounded-md relative">
               <span className="relative z-10">Google (gemini-1.5-flash)</span>
               <TokenCounter provider="google" />
-              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md">
-              </span>
+              <span className="absolute inset-0 bg-yellow-500 opacity-20 blur-xl rounded-md"></span>
             </h2>
 
             {/* Token Counter Here */}

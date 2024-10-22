@@ -15,10 +15,7 @@ import {
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 
-const dummyData = [
-  { value: 50 },
-  { value: 50 },
-];
+const dummyData = [{ value: 50 }, { value: 50 }];
 
 export default function UsageChartSkeleton() {
   const chartConfig = {
@@ -46,12 +43,10 @@ export default function UsageChartSkeleton() {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
-        {
-          /* <ChartContainer
+        {/* <ChartContainer
           className="mx-auto aspect-square max-h-[250px]"
           config={chartConfig}
-        > */
-        }
+        > */}
         <div className="relative w-full h-full flex items-center justify-center my-4 pb-8">
           <Skeleton className="w-44 h-44 rounded-full" />
         </div>

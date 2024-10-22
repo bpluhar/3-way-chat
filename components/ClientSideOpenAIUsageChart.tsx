@@ -68,9 +68,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function ClientSideOpenAIUsageChart(
-  { usageStats }: { usageStats: TokenUsageLog[] },
-) {
+export default function ClientSideOpenAIUsageChart({
+  usageStats,
+}: {
+  usageStats: TokenUsageLog[];
+}) {
   const chartData: ChartDataItem[] = useMemo(() => {
     const totalPromptTokens = usageStats.reduce(
       (sum, log) => sum + (log.token_count.openai?.promptTokens || 0),
@@ -116,10 +118,7 @@ export default function ClientSideOpenAIUsageChart(
           className="mx-auto aspect-square max-h-[250px]"
         >
           <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent />}
-            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Pie
               data={chartData}
               dataKey="value"
