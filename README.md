@@ -1,5 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with
-[`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This app created with NextJS and Vercel AI SDK allows you to prompt 3 different LLM's simultaneously. Claude, GPT and Gemini can all be prompted at the same time and their responses streamed back to the client. Currently has basic auth using Middleware with Pocketbase but can easily be removed for testing, just modify `middleware.ts`
 
 ## Getting Started
 
